@@ -32,11 +32,32 @@ router.post("/api/notes", (req, res) => {
 });
 
 router.delete("/api/notes/:id", (req, res) => {
-
+  const id = req.params.id;
+  notes
+    .delete(id)
+    .then((note) =>
+      note
+        ? res.json({ data: note })
+        : errorHandler(res, 404, "Resource not found")
+    )
+    .catch((err) => {
+      errorHandler(res, 400, err);
+    });
 });
 
 router.put("/api/notes/:id", (req, res) => {
+  const id = req.params.id;
+  const content = req.body.content;
+  const author = req.body.author;
 
+  notes
+    .update(id, content, author)
+    .then((note) =>
+      note
+        ? res.json({ data: note })
+        : errorHandler(res, 404, "Resource not found")
+    )
+    .catch((err) => errorHandler(res, 400, err));
 });
 
 function errorHandler(res, status, error) {
