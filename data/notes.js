@@ -2,9 +2,13 @@ const faker = require("faker");
 
 const NUM_SAMPLES = 4;
 
-function addSampleNotes(notes) {
-  for (let i = 0; i < NUM_SAMPLES; i++) {
-    notes.create(faker.lorem.paragraphs(), faker.name.findName());
+async function addSampleNotes(notes) {
+  const data = await notes.readAll();
+
+  if (data.length === 0) {
+    for (let i = 0; i < NUM_SAMPLES; i++) {
+      await notes.create(faker.lorem.paragraphs(), faker.name.findName());
+    }
   }
 }
 
