@@ -1,3 +1,4 @@
+const db = require("./data/db.js");
 const express = require("express");
 const noteRoutes = require("./routes/notes.js");
 const cors = require("cors");
@@ -6,6 +7,7 @@ const morgan = require("morgan");
 const app = express();
 const port = process.env.PORT || 4567;
 
+db.connect();
 app.use(cors());
 app.use(helmet());
 app.use(morgan("dev"));
