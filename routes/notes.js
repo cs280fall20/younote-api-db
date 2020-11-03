@@ -23,7 +23,12 @@ router.get("/api/notes/:id", (req, res) => {
 });
 
 router.post("/api/notes", (req, res) => {
-
+  const content = req.body.content;
+  const author = req.body.author;
+  notes
+    .create(content, author)
+    .then((note) => res.status(201).json({ data: note }))
+    .catch((err) => errorHandler(res, 400, err));
 });
 
 router.delete("/api/notes/:id", (req, res) => {
