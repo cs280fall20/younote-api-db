@@ -20,12 +20,18 @@ class NoteDao {
     return note;
   }
 
-  update(id, content, author) {
-    return null;
+  async update(id, content, author) {
+    const note = await Note.findByIdAndUpdate(
+      id,
+      { content, author },
+      { new: true, runValidators: true }
+    );
+    return note;
   }
 
-  delete(id) {
-    return null;
+  async delete(id) {
+    const note = await Note.findByIdAndDelete(id);
+    return note;
   }
 }
 
