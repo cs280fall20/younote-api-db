@@ -7,7 +7,8 @@ async function addSampleNotes(notes) {
 
   if (data.length === 0) {
     for (let i = 0; i < NUM_SAMPLES; i++) {
-      await notes.create(faker.lorem.paragraphs(), faker.name.findName());
+      // await notes.create(faker.lorem.paragraphs(), faker.name.findName());
+      await notes.create(faker.lorem.paragraphs(), "ali");
     }
   }
 }
